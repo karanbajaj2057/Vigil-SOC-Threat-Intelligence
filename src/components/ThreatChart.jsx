@@ -1,0 +1,6 @@
+import React from "react";
+import { activity } from "../data/demoData";
+export default function ThreatChart() {
+  const max = Math.max(...activity.map(x => x.value));
+  return <section className="panel chart-panel"><div className="panel-heading"><div><h2>Threat activity</h2><p>Illustrative event volume over the last 7 days</p></div><span className="select-like">Last 7 days⌄</span></div><div className="chart"><div className="y-labels"><span>80</span><span>60</span><span>40</span><span>20</span><span>0</span></div><div className="plot">{[80,60,40,20,0].map(n=><div className="gridline" style={{bottom:`${n/80*100}%`}} key={n}/ >)}<div className="bars">{activity.map(x=><div className="bar-wrap" key={x.day}><div className="bar" style={{height:`${x.value/max*88}%`}} title={`${x.value} demo events`}/><small>{x.day}</small></div>)}</div></div></div><div className="chart-foot"><span><i className="legend-dot"/> Simulated detections</span><span>Demo dataset · Not live telemetry</span></div></section>;
+}

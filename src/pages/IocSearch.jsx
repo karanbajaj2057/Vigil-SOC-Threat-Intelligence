@@ -1,0 +1,9 @@
+import React, { useState } from "react";
+import { Search, Copy, ShieldCheck } from "lucide-react";
+import { indicators } from "../data/demoData";
+import SeverityBadge from "../components/SeverityBadge";
+export default function IocSearch() {
+ const [query,setQuery]=useState("");
+ const results=indicators.filter(x=>Object.values(x).some(v=>String(v).toLowerCase().includes(query.toLowerCase())));
+ return <div className="page-content"><div className="page-intro"><div><span className="eyebrow">INDICATOR INVESTIGATION</span><h2>IOC search</h2><p>Search sample IP addresses, domains and file hashes.</p></div><span className="feed-status"><i/> Local demo data</span></div><div className="search-panel"><Search size={19}/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Search an IP, domain, hash or threat type..." /><kbd>ENTER</kbd></div><div className="notice"><ShieldCheck size={17}/> These are reserved/example indicators for demonstration. No live reputation lookup is performed.</div><section className="panel"><div className="panel-heading"><div><h2>Indicator results</h2><p>{results.length} matching demo indicators</p></div></div><div className="table-scroll"><table><thead><tr><th>INDICATOR</th><th>TYPE</th><th>THREAT</th><th>SEVERITY</th><th>CONFIDENCE</th></tr></thead><tbody>{results.map(x=><tr key={x.indicator}><td className="mono">{x.indicator} <button className="copy-btn" title="Copy indicator" onClick={()=>navigator.clipboard?.writeText(x.indicator)}><Copy size={13}/></button></td><td>{x.kind}</td><td>{x.threat}</td><td><SeverityBadge value={x.severity}/></td><td><span className="status">{x.confidence}</span></td></tr>)}</tbody></table></div></section></div>;
+}

@@ -1,0 +1,6 @@
+import React from "react";
+import { tactics } from "../data/demoData";
+import { Network } from "lucide-react";
+export default function AttackMap() {
+ return <div className="page-content"><div className="page-intro"><div><span className="eyebrow">ADVERSARY BEHAVIOR</span><h2>MITRE ATT&CK coverage</h2><p>Explore illustrative tactic coverage inspired by the ATT&CK knowledge base.</p></div><span className="feed-status">Training view</span></div><div className="notice"><Network size={17}/> This is a simplified educational visualization, not an official MITRE ATT&CK matrix or a validated mapping.</div><div className="attack-grid">{tactics.map(([name,val],i)=><article className="attack-card" key={name}><div className="attack-number">TACTIC 0{i+1}</div><h3>{name}</h3><div className="attack-count">{Math.round(val/10)} <small>sample techniques</small></div><div className="progress"><i style={{width:`${val}%`}}/></div><small className="muted">{val}% illustrative coverage</small></article>)}</div></div>;
+}
